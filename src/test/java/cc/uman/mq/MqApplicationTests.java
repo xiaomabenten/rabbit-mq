@@ -1,13 +1,19 @@
-# rabbit-mq
-SpringBoot 实现rabbitmq 延时发送和及时发送，使用Spring事件处理机制实现任务分发开启子线程处理事务
+package cc.uman.mq;
 
-### CycleQueueConfig
-实现延时消息 两个交换机 和 一个消费者的 创建和绑定关系
+import cc.uman.mq.rabbit.config.CycleQueueConfig;
+import cc.uman.mq.rabbit.config.ExpirationMessagePostProcessor;
+import cc.uman.mq.rabbit.config.SingleQueueConfig;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-### ExpirationMessagePostProcessor
-实现MessagePostProcessor，设置消息过期时间
-
-### 演示代码
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class MqApplicationTests {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -37,3 +43,5 @@ SpringBoot 实现rabbitmq 延时发送和及时发送，使用Spring事件处理
         //删除消息队列
         rabbitAdmin.deleteQueue(SingleQueueConfig.SINGLE_QUEUE_JOB_MESSAGE);
     }
+
+}
